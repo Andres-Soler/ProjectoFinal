@@ -1,0 +1,28 @@
+{
+  "name": "projectofinal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andres-Soler/ProjectoFinal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Andres-Soler/ProjectoFinal/issues"
+  },
+  "homepage": "https://github.com/Andres-Soler/ProjectoFinal#readme",
+  "dependencies": {
+    "firebase": "^12.17.1"
+  },
+  "devDependencies": {
+    "vite": "^8.2.1"
+  }
+}
