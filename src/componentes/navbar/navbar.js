@@ -14,7 +14,7 @@ export default function mostrarNavbar() {
 
             <div class="navbar-links">
                 <button id="btnInicio">Inicio</button>
-                <button id="btnLogin">Iniciar sesión</button>
+                <button id="btnNavLogin">Iniciar sesión</button>
                 <button id="btnRegistro">Registrarse</button>
                 <button id="btnUsuario">Usuario</button>
             </div>
@@ -25,8 +25,8 @@ export default function mostrarNavbar() {
         window.location.hash = "#inicio";
     });
 
-    document.getElementById("btnLogin").addEventListener("click", () => {
-        window.location.hash = "#login";
+    document.getElementById("btnNavLogin").addEventListener("click", () => {
+    window.location.hash = "#login";
     });
 
     document.getElementById("btnRegistro").addEventListener("click", () => {
