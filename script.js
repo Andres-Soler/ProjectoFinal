@@ -1,4 +1,5 @@
 let lives = 3;
+let userXP = 0;
 document.getElementById("retry-button").onclick = function() {
 
     lives = 3;
@@ -29,6 +30,7 @@ document.getElementById("exit-button").onclick = function() {
     window.location.href = "index.html";
 
 };
+
 const lessons = {
 
     introduction: {
@@ -710,6 +712,22 @@ function showDebugExercise(activity) {
 
 }
 
+function completeLesson() {
+    userXP += 25;
+
+    document.getElementById("info-screen").style.display = "none";
+    document.querySelector(".question").style.display = "none";
+    document.querySelector(".check-button").style.display = "none";
+
+    document.getElementById("completion-screen").style.display = "flex";
+
+    console.log("XP:", userXP);
+}
+
+function goBackToCourse() {
+    history.back();
+}
+
 
 
 function nextActivity() {
@@ -724,7 +742,7 @@ function nextActivity() {
 
 function finishLesson() {
 
-    console.log("Lesson complete!");
+    completeLesson();
 
 }
 

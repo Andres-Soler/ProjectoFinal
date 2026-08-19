@@ -570,3 +570,40 @@ body {
     background: #ddd;
     color: #222;
 }
+
+
+.completion-screen {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5f5f5;
+    z-index: 1000;
+}
+
+.completion-content {
+    text-align: center;
+}
+
+.completion-content h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.xp-reward {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.completion-content button {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+}
