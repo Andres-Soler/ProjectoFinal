@@ -1,3 +1,8 @@
+/* =========================================================
+   GENERAL PAGE STYLES
+   ========================================================= */
+
+/* Basic settings applied to the entire website */
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -6,7 +11,12 @@ body {
 }
 
 
+/* =========================================================
+   COURSE MAP
+   The screen that shows all the available lessons/nodes
+   ========================================================= */
 
+/* Container for the entire course path */
 .course-map {
     display: flex;
     flex-direction: column;
@@ -15,23 +25,26 @@ body {
 }
 
 
-
+/* Individual lesson/node on the course map */
 .lesson {
     width: 200px;
     text-align: center;
 }
 
 
+/* Move a lesson slightly to the left */
 .lesson.left {
     transform: translateX(-60px);
 }
 
+
+/* Move a lesson slightly to the right */
 .lesson.right {
     transform: translateX(60px);
 }
 
 
-
+/* Button surrounding each lesson's image */
 .lesson-button {
     border: none;
     background: none;
@@ -40,7 +53,7 @@ body {
 }
 
 
-
+/* Image inside a lesson button */
 .lesson-button img {
     width: 80px;
     height: 80px;
@@ -48,17 +61,25 @@ body {
 }
 
 
-
+/* Lesson title */
 .lesson h2 {
     margin: 10px 0 5px;
 }
 
+
+/* Lesson description */
 .lesson p {
     margin: 0;
     color: #666;
 }
 
 
+/* =========================================================
+   COURSE MAP PATH
+   Lines connecting the different lessons
+   ========================================================= */
+
+/* Basic path connecting two lessons */
 .path {
     width: 80px;
     height: 5px;
@@ -66,13 +87,25 @@ body {
     margin: 20px 0;
 }
 
+
+/* Rotate a path toward the right */
 .path-right {
     transform: rotate(45deg);
 }
 
+
+/* Rotate a path toward the left */
 .path-left {
     transform: rotate(-45deg);
 }
+
+
+/* =========================================================
+   LESSON NODE BUTTONS
+   The circular buttons containing lesson images
+   ========================================================= */
+
+/* Circular lesson button */
 .lesson-button {
     width: 100px;
     height: 100px;
@@ -84,23 +117,36 @@ body {
 
     padding: 10px;
 
-    cursor: pointer;
-
+    /* Shadow underneath the node */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 
+    cursor: pointer;
+
+    /* Makes the hover animation smooth */
     transition: transform 0.15s ease;
 }
 
+
+/* Makes the lesson node slightly bigger when hovered */
 .lesson-button:hover {
     transform: scale(1.08);
 }
 
+
+/* Makes the lesson image fill the button */
 .lesson-button img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+
+/* =========================================================
+   LESSON PAGE
+   The screen where the actual lesson activities happen
+   ========================================================= */
+
+/* Main container for a lesson */
 .lesson-page {
     min-height: 100vh;
     box-sizing: border-box;
@@ -112,12 +158,19 @@ body {
 }
 
 
+/* =========================================================
+   LESSON HEADER
+   Contains the back button and lives
+   ========================================================= */
+
 .lesson-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+
+/* Back button in the top-left corner */
 .back-button {
     border: none;
     background: none;
@@ -128,21 +181,27 @@ body {
 }
 
 
-
+/* Container holding the player's lives */
 .lives {
     display: flex;
     gap: 6px;
 }
 
+
+/* Individual heart/life images */
 .lives img {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
 
     object-fit: contain;
 }
 
 
+/* =========================================================
+   QUESTION / ACTIVITY AREA
+   ========================================================= */
 
+/* Main container for an activity/question */
 .question {
     flex: 1;
 
@@ -156,23 +215,34 @@ body {
     margin: 0 auto;
 }
 
+
+/* Number showing which question/activity the user is on */
 .question-number {
     color: #777;
     font-size: 14px;
 }
 
+
+/* Main question text */
 .question h1 {
     font-size: 26px;
     margin-bottom: 30px;
 }
 
 
+/* =========================================================
+   MULTIPLE CHOICE
+   ========================================================= */
+
+/* Container holding all answer buttons */
 .answers {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+
+/* Individual multiple-choice answer */
 .answer {
     width: 100%;
 
@@ -191,10 +261,19 @@ body {
     cursor: pointer;
 }
 
+
+/* Appearance of an answer after the player selects it */
 .answer.selected {
     border-color: #333;
     background: #eee;
 }
+
+
+/* =========================================================
+   CHECK BUTTON
+   ========================================================= */
+
+/* Button used to submit an answer */
 .check-button {
     width: 100%;
 
@@ -212,6 +291,14 @@ body {
 
     cursor: pointer;
 }
+
+
+/* =========================================================
+   INFORMATION ACTIVITIES
+   Used for introducing concepts before questions
+   ========================================================= */
+
+/* Container for an information screen */
 .info-screen {
     width: 90%;
     max-width: 500px;
@@ -219,75 +306,136 @@ body {
     text-align: center;
 }
 
+
+/* Information screen title */
 .info-screen h1 {
     font-size: 28px;
     margin-bottom: 20px;
 }
 
+
+/* Information screen description */
 .info-screen p {
     font-size: 17px;
     line-height: 1.6;
     color: #555;
 }
 
+
+/* Button used to continue after reading information */
 .next-button {
     margin-top: 30px;
     padding: 14px 35px;
+
     border: none;
     border-radius: 12px;
+
     cursor: pointer;
+
     font-size: 16px;
     font-weight: 600;
 }
 
-/* Hide the question until the info section is finished */
 
+/* =========================================================
+   INITIAL ACTIVITY VISIBILITY
+   ========================================================= */
+
+/*
+   The question is hidden initially because
+   the lesson may start with an information screen.
+*/
 .question {
     display: none;
 }
+
+
+/*
+   The CHECK button is hidden initially.
+   JavaScript shows it when an activity needs it.
+*/
 .check-button {
     display: none;
 }
+
+
+/* =========================================================
+   MATCHING PAIRS
+   ========================================================= */
+
+/* Container holding the left and right columns */
 #matching-container {
     display: flex;
     justify-content: center;
     gap: 20px;
+
     width: 100%;
+
     margin-top: 25px;
 }
 
+
+/* Left/right column containing the matching buttons */
 .matching-column {
     display: flex;
     flex-direction: column;
+
     gap: 12px;
+
     width: 45%;
 }
 
+
+/* Individual matching option */
 .matching-option {
     min-height: 55px;
+
     padding: 10px;
+
     border: 2px solid #ddd;
     border-radius: 12px;
+
     background: white;
+
     font-family: 'Inter', sans-serif;
     font-size: 14px;
+
     cursor: pointer;
 }
 
+
+/* Appearance when a matching option is selected */
 .matching-option.selected {
     border-color: #333;
     background: #eee;
 }
 
+
+/*
+   Appearance after the correct pair has been matched.
+   pointer-events prevents the user from clicking it again.
+*/
 .matching-option.matched {
     opacity: 0.5;
     pointer-events: none;
 }
+
+
+/* =========================================================
+   "WHAT DOES THIS CODE DO?" ACTIVITIES
+   Displays code that the user has to interpret
+   ========================================================= */
+
+/* Code displayed to the user */
 #question-code {
     display: none;
+
     width: 90%;
+
     margin: 20px auto;
+
     padding: 16px;
+
     box-sizing: border-box;
 
     background: #1e1e1e;
@@ -296,66 +444,108 @@ body {
     border-radius: 12px;
 
     text-align: left;
+
     font-family: monospace;
     font-size: 15px;
 
+    /* Allows long code to wrap instead of overflowing */
     white-space: pre-wrap;
 }
 
+
+/* =========================================================
+   CODE WRITING ACTIVITIES
+   Text editor where the user writes their own code
+   ========================================================= */
+
 #code-editor {
     display: none;
+
     width: 90%;
+
     min-height: 180px;
+
     margin: 20px auto;
+
     padding: 15px;
+
     box-sizing: border-box;
 
+    /* Dark code-editor appearance */
     background: #1e1e1e;
     color: white;
 
     border: none;
     border-radius: 12px;
 
+    /* Makes typed code look like actual code */
     font-family: monospace;
     font-size: 15px;
 
+    /* Allows the user to resize the editor vertically */
     resize: vertical;
 }
-.lives img {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-}
+
+
+/* =========================================================
+   GAME OVER SCREEN
+   Shown when the player loses all 3 lives
+   ========================================================= */
+
+/*
+   Full-screen overlay shown when the player
+   runs out of lives.
+
+   It starts hidden and JavaScript displays it
+   when lives reach 0.
+*/
 .game-over-screen {
     display: none;
+
+    /* Covers the entire screen */
     position: fixed;
     inset: 0;
 
     background: #f5f5f5;
 
+    /* Used when JavaScript changes display to "flex" */
     align-items: center;
     justify-content: center;
 
     text-align: center;
 }
 
+
+/* Container holding the game-over text and buttons */
 .game-over-content {
     width: 85%;
     max-width: 400px;
 }
 
+
+/* Game-over title */
 .game-over-content h1 {
     margin-bottom: 10px;
 }
 
+
+/* Game-over description */
 .game-over-content p {
     margin-bottom: 30px;
 }
 
+
+/* =========================================================
+   GAME OVER BUTTONS
+   ========================================================= */
+
+/* Shared styles for both game-over buttons */
 .retry-button,
 .exit-button {
     width: 100%;
+
     padding: 15px;
+
     margin-top: 10px;
 
     border: none;
@@ -367,11 +557,15 @@ body {
     cursor: pointer;
 }
 
+
+/* TRY AGAIN button */
 .retry-button {
     background: #222;
     color: white;
 }
 
+
+/* EXIT LESSON button */
 .exit-button {
     background: #ddd;
     color: #222;
