@@ -3,39 +3,113 @@ import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebaseConfig.js';
 
 export default function mostrarRegistro() {
-    const app = document.getElementById("app");
 
-    app.innerHTML = `<h2>Registro</h2>
-    <input type="text" id="nombre" placeholder="Nombre"><br>
-    <input type="email" id="correo" placeholder="Correo electrónico"><br>
-    <input type="password" id="contrasena" placeholder="Contraseña"><br>
-    <input type="text" id="fecha" placeholder="Fecha de nacimiento"><br>
-    <input type="tel" id="telefono" placeholder="Teléfono"><br>
-    <button id="btnRegistro">Registrarse</button>`;
+    const main = document.querySelector("main");
 
-    document.getElementById("btnRegistro").addEventListener("click", async() => {
-        const nombre = document.getElementById("nombre").value;
-        const correo = document.getElementById("correo").value;
-        const contrasena = document.getElementById("contrasena").value;
-        const fecha = document.getElementById("fecha").value;
-        const telefono = document.getElementById("telefono").value;
-        
+    if (!main) {
+        console.error("❌ No se encontró <main>");
+        return;
+    }
+
+    main.innerHTML = `
+        <section class="registro">
+            <h1>Crear cuenta</h1>
+
+            <form id="registroForm">
+
+                <label for="nombre">Nombre</label>
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Tu nombre"
+                    required
+                >
+
+                <label for="email">Correo</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="correo@ejemplo.com"
+                    required
+                >
+
+                <label for="password">Contraseña</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Contraseña"
+                    required
+                >
+
+                <button type="submit">
+                    Registrarse
+                </button>
+
+            </form>
+
+            <p id="mensajeRegistro"></p>
+        </section>
+    `;
+
+    const form = document.querySelector("#registroForm");
+    const mensaje = document.querySelector("#mensajeRegistro");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const nombre = document.querySelector("#nombre").value.trim();
+        const email = document.querySelector("#email").value.trim();
+        const password = document.querySelector("#password").value;
+
+        mensaje.textContent = "Creando cuenta...";
+
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, correo, contrasena);
-            const user = userCredential.user;
+            const credencial = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
-            await setDoc(doc(db, 'usuarios', user.uid), {
-                uid: user.uid,
-                nombre,
-                correo,
-                fecha,
-                telefono,
+            const usuario = credencial.user;
+
+            await setDoc(doc(db, "usuarios", usuario.uid), {
+                nombre: nombre,
+                email: email,
+                uid: usuario.uid,
+                fechaRegistro: new Date()
             });
 
-            alert('Usuario registrado correctamente');
-            mostrarLogin();
+            console.log("✅ Usuario registrado:", usuario.uid);
+
+            mensaje.textContent = "✅ ¡Cuenta creada correctamente!";
+
+            form.reset();
+
         } catch (error) {
-            alert('Error al registrarse: ' + error.message);
+            console.error("❌ Error al registrar:", error);
+
+            mensaje.textContent = "❌ " + obtenerMensajeError(error);
         }
     });
+
+    function obtenerMensajeError(error) {
+
+        switch (error.code) {
+
+            case "auth/email-already-in-use":
+                return "Ese correo ya está registrado.";
+
+            case "auth/invalid-email":
+                return "El correo no es válido.";
+
+            case "auth/weak-password":
+                return "La contraseña es demasiado débil.";
+
+            case "auth/missing-password":
+                return "Debes escribir una contraseña.";
+
+            default:
+                return "No se pudo crear la cuenta.";
+        }
+    }
 }

@@ -1,10 +1,10 @@
-import { signOut } from 'firebase/auth';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { signOut, deleteUser } from 'firebase/auth';
+import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebaseConfig.js';
 
 export default async function mostrarUsuario() {
-    const app = document.getElementById("app");
 
+    const app = document.getElementById("app");
     const user = auth.currentUser;
 
     if (!user) {
@@ -14,11 +14,14 @@ export default async function mostrarUsuario() {
                 <p>Debes iniciar sesión para ver tu información.</p>
             </div>
         `;
+
         return;
     }
 
+    const usuarioRef = doc(db, "usuarios", user.uid);
+
     try {
-        const usuarioRef = doc(db, "usuarios", user.uid);
+
         const usuarioSnap = await getDoc(usuarioRef);
 
         if (!usuarioSnap.exists()) {
@@ -28,6 +31,7 @@ export default async function mostrarUsuario() {
                     <p>No se encontraron los datos de tu perfil.</p>
                 </div>
             `;
+
             return;
         }
 
@@ -38,10 +42,8 @@ export default async function mostrarUsuario() {
                 <h2>Mi Usuario</h2>
 
                 <p><strong>Nombre:</strong> ${datos.nombre}</p>
-                <p><strong>Correo:</strong> ${datos.correo}</p>
+                <p><strong>Correo:</strong> ${datos.email}</p>
                 <p><strong>UID:</strong> ${datos.uid}</p>
-                <p><strong>Fecha de nacimiento:</strong> ${datos.fecha}</p>
-                <p><strong>Teléfono:</strong> ${datos.telefono}</p>
 
                 <button id="btnModificar">
                     Modificar datos
@@ -50,94 +52,141 @@ export default async function mostrarUsuario() {
                 <button id="btnCerrarSesion">
                     Cerrar sesión
                 </button>
+
+                <button id="btnEliminarCuenta">
+                    Eliminar cuenta
+                </button>
             </div>
         `;
 
-        document.getElementById("btnModificar").addEventListener("click", () => {
+        document
+            .getElementById("btnModificar")
+            .addEventListener("click", () => {
 
-            app.innerHTML = `
-                <div>
-                    <h2>Modificar datos</h2>
+                app.innerHTML = `
+                    <div>
+                        <h2>Modificar datos</h2>
 
-                    <label>Nombre:</label>
-                    <input 
-                        type="text" 
-                        id="nombre" 
-                        value="${datos.nombre || ''}"
-                    >
+                        <label>Nombre:</label>
 
-                    <br><br>
+                        <input
+                            type="text"
+                            id="nombre"
+                            value="${datos.nombre || ''}"
+                        >
 
-                    <label>Fecha de nacimiento:</label>
-                    <input 
-                        type="text" 
-                        id="fecha" 
-                        value="${datos.fecha || ''}"
-                    >
+                        <br><br>
 
-                    <br><br>
+                        <button id="btnGuardar">
+                            Guardar cambios
+                        </button>
 
-                    <label>Teléfono:</label>
-                    <input 
-                        type="tel" 
-                        id="telefono" 
-                        value="${datos.telefono || ''}"
-                    >
+                        <button id="btnCancelar">
+                            Cancelar
+                        </button>
+                    </div>
+                `;
 
-                    <br><br>
+                document
+                    .getElementById("btnGuardar")
+                    .addEventListener("click", async () => {
 
-                    <button id="btnGuardar">
-                        Guardar cambios
-                    </button>
+                        const nuevoNombre =
+                            document.getElementById("nombre").value;
 
-                    <button id="btnCancelar">
-                        Cancelar
-                    </button>
-                </div>
-            `;
+                        try {
 
-            document.getElementById("btnGuardar").addEventListener("click", async () => {
+                            await updateDoc(usuarioRef, {
+                                nombre: nuevoNombre
+                            });
 
-                const nuevoNombre = document.getElementById("nombre").value;
-                const nuevaFecha = document.getElementById("fecha").value;
-                const nuevoTelefono = document.getElementById("telefono").value;
+                            alert("Datos actualizados correctamente");
 
-                try {
-                    await updateDoc(usuarioRef, {
-                        nombre: nuevoNombre,
-                        fecha: nuevaFecha,
-                        telefono: nuevoTelefono
+                            mostrarUsuario();
+
+                        } catch (error) {
+
+                            console.error(
+                                "Error actualizando los datos:",
+                                error
+                            );
+
+                            alert(
+                                "Error al actualizar los datos: " +
+                                error.message
+                            );
+                        }
                     });
 
-                    alert("Datos actualizados correctamente");
+                document
+                    .getElementById("btnCancelar")
+                    .addEventListener("click", () => {
+                        mostrarUsuario();
+                    });
+            });
 
-                    mostrarUsuario();
+        document
+            .getElementById("btnCerrarSesion")
+            .addEventListener("click", async () => {
+
+                try {
+
+                    await signOut(auth);
+
+                    alert("Sesión cerrada correctamente");
+
+                    window.location.reload();
 
                 } catch (error) {
-                    console.error("Error actualizando los datos:", error);
-                    alert("Error al actualizar los datos: " + error.message);
+
+                    alert(
+                        "Error al cerrar sesión: " +
+                        error.message
+                    );
                 }
             });
 
-            document.getElementById("btnCancelar").addEventListener("click", () => {
-                mostrarUsuario();
+        document
+            .getElementById("btnEliminarCuenta")
+            .addEventListener("click", async () => {
+
+                const confirmar = confirm(
+                    "¿Estás seguro de que quieres eliminar tu cuenta?"
+                );
+
+                if (!confirmar) {
+                    return;
+                }
+
+                try {
+
+                    await deleteDoc(usuarioRef);
+                    await deleteUser(user);
+
+                    alert("Cuenta eliminada correctamente");
+
+                    window.location.reload();
+
+                } catch (error) {
+
+                    console.error(
+                        "Error eliminando la cuenta:",
+                        error
+                    );
+
+                    alert(
+                        "Error al eliminar la cuenta: " +
+                        error.message
+                    );
+                }
             });
-        });
-
-        document.getElementById("btnCerrarSesion").addEventListener("click", async () => {
-            try {
-                await signOut(auth);
-
-                alert("Sesión cerrada correctamente");
-                window.location.reload();
-
-            } catch (error) {
-                alert("Error al cerrar sesión: " + error.message);
-            }
-        });
 
     } catch (error) {
-        console.error("Error obteniendo los datos:", error);
+
+        console.error(
+            "Error obteniendo los datos:",
+            error
+        );
 
         app.innerHTML = `
             <div>
