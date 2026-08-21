@@ -607,3 +607,159 @@ body {
     font-weight: 700;
     cursor: pointer;
 }
+
+/* =========================================================
+   COURSE BROWSER
+   ========================================================= */
+
+.courses-page {
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    padding: 30px 20px 100px;
+
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+
+.courses-header {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+
+.courses-header h1 {
+    margin-bottom: 5px;
+}
+
+
+.courses-header p {
+    color: #666;
+    margin: 0;
+}
+
+
+/* SEARCH */
+
+.course-search {
+    margin-bottom: 25px;
+}
+
+
+.course-search input {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 16px;
+
+    border: 2px solid #ddd;
+    border-radius: 14px;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.course-search input:focus {
+    border-color: #333;
+}
+
+
+/* COURSE LIST */
+
+.courses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* COURSE CARD */
+
+.course-card {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 18px;
+
+    border: 2px solid #ddd;
+    border-radius: 18px;
+
+    background: white;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: transform 0.15s ease,
+                box-shadow 0.15s ease;
+}
+
+
+.course-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* COURSE ICON */
+
+.course-icon {
+    width: 65px;
+    height: 65px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #f1f1f1;
+
+    font-size: 32px;
+}
+
+
+/* COURSE INFO */
+
+.course-info {
+    flex: 1;
+}
+
+
+.course-info h2 {
+    margin: 0 0 5px;
+
+    font-size: 18px;
+}
+
+
+.course-info p {
+    margin: 0 0 10px;
+
+    color: #666;
+
+    font-size: 14px;
+}
+
+
+.course-info span {
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #666;
+}

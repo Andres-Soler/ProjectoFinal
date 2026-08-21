@@ -78,6 +78,17 @@ export default function mostrarRegistro() {
                 uid: usuario.uid,
                 fechaRegistro: new Date()
             });
+            await setDoc(doc(db, "progreso", usuario.uid), {
+
+            xp: 0,
+
+           cursos: {
+           python: {
+           completedLessons: []
+           }
+           }
+
+           });
 
             console.log("✅ Usuario registrado:", usuario.uid);
 

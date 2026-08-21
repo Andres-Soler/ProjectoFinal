@@ -114,43 +114,176 @@ const lessons = {
 
     variables: {
 
-        title: "Variables",
+    title: "Variables",
 
-        activities: [
+    activities: [
 
-            {
-                type: "info",
+        {
+            type: "info",
 
-                title: "What is a Variable?",
+            title: "What are Variables?",
 
-                text: "A variable is a named place where a program can store information. The value stored in a variable can be used and changed while the program runs."
-            },
+            text: "Variables are used to store information in a program. Each variable has a name and a value, and that value can be used or changed while the program runs."
+        },
 
-            {
-                type: "multiple-choice",
+        {
+            type: "multiple-choice",
 
-                question: "Which line creates a variable called age?",
+            question: "Which line creates a variable called age?",
 
-                answers: [
-                    "age = 18",
-                    "print(age)",
-                    "age == 18",
-                    "variable age"
-                ],
+            answers: [
+                "age = 18",
+                "print(age)",
+                "age == 18",
+                "variable age"
+            ],
 
-                correct: 0
-            },
+            correct: 0
+        },
 
-            {
-                type: "code",
+        {
+            type: "multiple-choice",
 
-                question: 'Create a variable called "score" and give it the value 100.',
+            question: "What value is stored in the variable score?",
 
-                expected: "score = 100"
-            }
+            code: "score = 100",
 
-        ]
-    }
+            answers: [
+                "score",
+                "100",
+                "0",
+                "It has no value"
+            ],
+
+            correct: 1
+        },
+
+        {
+            type: "matching",
+
+            question: "Match each concept with its description.",
+
+            pairs: [
+                {
+                    left: "Variable",
+                    right: "A named place for storing information"
+                },
+                {
+                    left: "Value",
+                    right: "The information stored in a variable"
+                },
+                {
+                    left: "Assignment",
+                    right: "Giving a value to a variable"
+                }
+            ]
+        },
+
+        {
+            type: "code",
+
+            question: 'Create a variable called "name" and give it the value "Alex".',
+
+            expected: 'name = "Alex"'
+        }
+
+    ]
+
+    },
+    dataTypes: {
+
+    title: "Data Types",
+
+    activities: [
+
+        {
+            type: "info",
+
+            title: "What are Data Types?",
+
+            text: "A data type describes what kind of information a value represents. Python has several built-in data types, including strings for text, integers for whole numbers, floats for decimal numbers, and booleans for true or false values."
+        },
+
+        {
+            type: "multiple-choice",
+
+            question: "Which data type is used to store text?",
+
+            answers: [
+                "int",
+                "float",
+                "str",
+                "bool"
+            ],
+
+            correct: 2
+        },
+
+        {
+            type: "multiple-choice",
+
+            question: "What data type is the value 42?",
+
+            answers: [
+                "str",
+                "int",
+                "float",
+                "bool"
+            ],
+
+            correct: 1
+        },
+
+        {
+            type: "multiple-choice",
+
+            question: "What data type is the value 3.14?",
+
+            answers: [
+                "int",
+                "str",
+                "float",
+                "bool"
+            ],
+
+            correct: 2
+        },
+
+        {
+            type: "matching",
+
+            question: "Match each data type with an example.",
+
+            pairs: [
+                {
+                    left: "str",
+                    right: '"Hello"'
+                },
+                {
+                    left: "int",
+                    right: "42"
+                },
+                {
+                    left: "float",
+                    right: "3.14"
+                },
+                {
+                    left: "bool",
+                    right: "True"
+                }
+            ]
+        },
+
+        {
+            type: "code",
+
+            question: 'Create a variable called "age" and give it the integer value 19.',
+
+            expected: "age = 19"
+        }
+
+    ]
+}
 
 };
 function loseLife() {
