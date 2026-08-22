@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   DUOPROG HOME
+========================================================= */
+
+
+.inicio {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 40px 25px 100px;
+
+    box-sizing: border-box;
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+
+/* =========================================================
+   WELCOME HEADER
+========================================================= */
+
+
+.inicio > h1 {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    margin: 0 0 8px;
+
+    color: #F4F7F8;
+
+}
+
+
+
+.inicio > p {
+
+    margin: 0 0 35px;
+
+    color: #94A3B8;
+
+    font-size: 16px;
+
+}
+
+
+
+/* =========================================================
+   COURSES
+========================================================= */
+
+
+.mis-cursos {
+
+    text-align: left;
+
+}
+
+
+
+.mis-cursos h2 {
+
+    margin-bottom: 15px;
+
+    font-size: 22px;
+
+    color: #F4F7F8;
+
+}
+
+
+
+/* =========================================================
+   COURSE CARD
+========================================================= */
+
+
+.curso-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+
+    width: 100%;
+
+
+    padding: 22px;
+
+
+    box-sizing: border-box;
+
+
+    background: #1D2633;
+
+
+    border: 1px solid #273548;
+
+
+    border-radius: 20px;
+
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+
+}
+
+
+
+/* =========================================================
+   COURSE ICON
+========================================================= */
+
+
+.curso-icon {
+
+
+    width: 75px;
+
+    height: 75px;
+
+
+    flex-shrink: 0;
+
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    border-radius: 18px;
+
+
+    background: #10151C;
+
+
+    color: #20DFF5;
+
+
+    font-size: 38px;
+
+
+}
+
+
+
+/* =========================================================
+   COURSE INFO
+========================================================= */
+
+
+.curso-info {
+
+    flex: 1;
+
+}
+
+
+
+.curso-info h3 {
+
+
+    margin: 0 0 6px;
+
+
+    font-size: 20px;
+
+
+    font-weight: 700;
+
+
+    color: #F4F7F8;
+
+
+}
+
+
+
+.curso-info p {
+
+
+    margin: 0 0 15px;
+
+
+    color: #94A3B8;
+
+
+    font-size: 14px;
+
+
+}
+
+
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+
+.curso-btn {
+
+
+    padding: 11px 22px;
+
+
+    border: none;
+
+
+    border-radius: 12px;
+
+
+    background: #2778FF;
+
+
+    color: white;
+
+
+    font-family: inherit;
+
+
+    font-size: 13px;
+
+
+    font-weight: 700;
+
+
+    cursor: pointer;
+
+
+    transition: .2s;
+
+
+}
+
+
+
+.curso-btn:hover {
+
+
+    background: #20DFF5;
+
+
+    color: #10151C;
+
+
+    transform: translateY(-2px);
+
+
+}
+
+
+
+/* =========================================================
+   XP SECTION
+========================================================= */
+
+
+.xp-section {
+
+
+    margin-top: 30px;
+
+
+    padding: 22px;
+
+
+    background: #1D2633;
+
+
+    border: 1px solid #273548;
+
+
+    border-radius: 20px;
+
+
+    text-align: left;
+
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+
+}
+
+
+
+.xp-section h2 {
+
+
+    margin: 0 0 8px;
+
+
+    font-size: 20px;
+
+
+    color: #F4F7F8;
+
+
+}
+
+
+
+.xp-section p {
+
+
+    margin: 0;
+
+
+    font-size: 28px;
+
+
+    font-weight: 800;
+
+
+    color: #20DFF5;
+
+
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+
+@media (max-width: 600px) {
+
+
+
+    .inicio {
+
+
+        padding: 30px 18px 100px;
+
+
+    }
+
+
+
+    .inicio > h1 {
+
+
+        font-size: 27px;
+
+
+    }
+
+
+
+    .curso-card {
+
+
+        padding: 16px;
+
+
+        gap: 14px;
+
+
+    }
+
+
+
+    .curso-icon {
+
+
+        width: 60px;
+
+
+        height: 60px;
+
+
+        font-size: 30px;
+
+
+    }
+
+
+
+    .curso-info h3 {
+
+
+        font-size: 17px;
+
+
+    }
+
+
+
+}

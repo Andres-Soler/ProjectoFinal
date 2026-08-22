@@ -1,13 +1,14 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebaseConfig.js';
+import './style.css'
 
 export default function mostrarRegistro() {
 
     const main = document.querySelector("main");
 
     if (!main) {
-        console.error("❌ No se encontró <main>");
+        console.error("No se encontró <main>");
         return;
     }
 
@@ -90,16 +91,16 @@ export default function mostrarRegistro() {
 
            });
 
-            console.log("✅ Usuario registrado:", usuario.uid);
+            console.log("Usuario registrado:", usuario.uid);
 
-            mensaje.textContent = "✅ ¡Cuenta creada correctamente!";
+            mensaje.textContent = "¡Cuenta creada correctamente!";
 
             form.reset();
 
         } catch (error) {
-            console.error("❌ Error al registrar:", error);
+            console.error("Error al registrar:", error);
 
-            mensaje.textContent = "❌ " + obtenerMensajeError(error);
+            mensaje.textContent = obtenerMensajeError(error);
         }
     });
 

@@ -1,0 +1,226 @@
+#app {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #10151C;
+
+}
+
+.user-card {
+
+    width: 420px;
+
+    padding: 35px;
+
+    background: #1D2633;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+
+    color: #F4F7F8;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+
+.user-card h2 {
+
+    text-align: center;
+
+    color: #F4F7F8;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+.user-info {
+
+    background: #10151C;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+}
+
+
+
+.user-info p {
+
+    margin: 12px 0;
+
+    color: #F4F7F8;
+
+}
+
+
+
+.user-info strong {
+
+    color: #20DFF5;
+
+}
+
+
+
+/* INPUT MODIFICAR DATOS */
+
+.user-input {
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    border: 2px solid #334155;
+
+    background: #10151C;
+
+    color: #F4F7F8;
+
+    font-size: 16px;
+
+}
+
+
+
+.user-input:focus {
+
+    outline: none;
+
+    border-color: #20DFF5;
+
+    box-shadow: 0 0 10px rgba(32,223,245,0.35);
+
+}
+
+
+
+/* BOTONES */
+
+.user-buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
+
+
+
+.primary-btn {
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #2778FF;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+
+.primary-btn:hover {
+
+    background: #20DFF5;
+
+    color: #10151C;
+
+    transform: translateY(-2px);
+
+}
+
+
+
+
+.secondary-btn {
+
+    padding: 15px;
+
+    border: 2px solid #2778FF;
+
+    border-radius: 18px;
+
+    background: transparent;
+
+    color: #F4F7F8;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+
+.secondary-btn:hover {
+
+    background: #2778FF;
+
+}
+
+
+
+
+.danger-btn {
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: #8B1E3F;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+
+.danger-btn:hover {
+
+    background: #D7263D;
+
+}

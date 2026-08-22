@@ -1,3 +1,5 @@
+import './style.css';
+
 export default function mostrarNavbar() {
     const navbar = document.getElementById("navbar");
 
@@ -16,7 +18,9 @@ export default function mostrarNavbar() {
                 <button id="btnInicio">Inicio</button>
                 <button id="btnNavLogin">Iniciar sesión</button>
                 <button id="btnRegistro">Registrarse</button>
-                <button id="btnUsuario">Usuario</button>
+                <button class="profile-btn" id="btnUsuario">
+                    Usuario
+                </button>
             </div>
         </nav>
     `;
