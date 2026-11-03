@@ -519,3 +519,31 @@ main{
 @media (prefers-reduced-motion: reduce){
   .user-buttons button{ transition: none; }
 }
+
+/* =========================================================
+   AÑADIR AL FINAL del style.css de las pantallas de login y de usuario
+   (si ambas carpetas usan el mismo CSS copiado, pégalo en las dos)
+   ========================================================= */
+ 
+/* ---- mensajes de estado (errores en rojo, éxito en verde) ---- */
+.user-message,
+.login-message {
+  margin: 0 0 14px;
+  min-height: 18px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--red);
+}
+ 
+.user-message.ok,
+.login-message.ok {
+  color: #0F7A44;
+}
+ 
+.user-message:empty,
+.login-message:empty {
+  display: none;
+}

@@ -112,3 +112,31 @@ main{
 @media (prefers-reduced-motion: reduce){
   .login-card button{ transition: none; }
 }
+
+/* ---- enlace "¿Olvidaste tu contraseña?" (anula el estilo de botón grande) ---- */
+.login-card .link-btn {
+  display: block;
+  width: auto;
+  margin: 14px auto 0;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  box-shadow: none;
+  color: var(--violet);
+  font-family: 'Fredoka', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+ 
+.login-card .link-btn:hover {
+  filter: none;
+  background: var(--violet-soft);
+}
+ 
+.login-card .link-btn:active {
+  box-shadow: none;
+  transform: none;
+}

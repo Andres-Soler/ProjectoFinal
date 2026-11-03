@@ -1,7 +1,20 @@
 import { auth, db } from '../../firebaseConfig.js';
 import { collection, getDocs } from 'firebase/firestore';
 import cloud from '../../../assets/images/cloud.svg';
+import iconTrophy from '../../../assets/images/icon-trophy.svg';
+import iconCrown from '../../../assets/images/icon-crown.svg';
+import iconMedalSilver from '../../../assets/images/icon-medal-silver.svg';
+import iconMedalBronze from '../../../assets/images/icon-medal-bronze.svg';
+import iconBolt from '../../../assets/images/icon-bolt.svg';
+import { nombreSeguro, escaparHTML } from '../../utils/filtroPalabras.js';
 import './style.css';
+
+// Icono como imagen (los emojis no se veían igual en todos los dispositivos)
+const ico = (src, size) =>
+    `<img src="${src}" alt="" width="${size}" height="${size}" style="vertical-align:middle">`;
+
+const badgeRanking = `<div class="badge-tag">${ico(iconTrophy, 20)} Ranking Semanal</div>`;
+const xpTag = (xp) => `${ico(iconBolt, 16)} ${xp} XP`;
 
 export default async function mostrarLeaderboard() {
     const app = document.getElementById("app");
@@ -27,7 +40,7 @@ export default async function mostrarLeaderboard() {
         ${decoraciones}
         <div class="leaderboard-page">
             <header class="leaderboard-header">
-                <div class="badge-tag">🏆 Ranking Semanal</div>
+                ${badgeRanking}
                 <h1>Tabla de Clasificación</h1>
                 <p>Compite con otros estudiantes y sube en el podio esta semana.</p>
             </header>
@@ -55,9 +68,12 @@ export default async function mostrarLeaderboard() {
             // Soporta weeklyXP o xp general registrado
             const weeklyXP = prog.weeklyXP !== undefined ? prog.weeklyXP : (prog.xp || 0);
 
+            const nombreBruto = u.nombre || (u.email ? u.email.split('@')[0] : 'Programador');
+
             usersList.push({
                 uid: docSnap.id,
-                nombre: u.nombre || (u.email ? u.email.split('@')[0] : 'Programador'),
+                // Si el nombre trae palabras no permitidas se muestra "Programador"
+                nombre: nombreSeguro(nombreBruto),
                 email: u.email || '',
                 weeklyXP: Number(weeklyXP) || 0,
                 totalXP: Number(prog.xp) || 0
@@ -88,7 +104,6 @@ export default async function mostrarLeaderboard() {
         }
 
         // Ordenar descendentemente por XP de la semana
-        // Ordenar únicamente usuarios reales registrados descendentemente por XP de la semana
         usersList.sort((a, b) => b.weeklyXP - a.weeklyXP);
 
         const currentUser = auth.currentUser;
@@ -107,7 +122,7 @@ export default async function mostrarLeaderboard() {
                 ${decoraciones}
                 <div class="leaderboard-page">
                     <header class="leaderboard-header">
-                        <div class="badge-tag">🏆 Ranking Semanal</div>
+                        ${badgeRanking}
                         <h1>Tabla de Clasificación</h1>
                         <p>Los 10 usuarios con más experiencia acumulada esta semana.</p>
                     </header>
@@ -129,59 +144,30 @@ export default async function mostrarLeaderboard() {
             return name.substring(0, 2).toUpperCase();
         };
 
-        // Renderizar el podio (Top 3)
+        // Una tarjeta del podio (el nombre y las iniciales se escapan porque vienen de usuarios)
+        const podiumCard = (user, clase, insignia) => {
+            const isCurrent = currentUid && user.uid === currentUid;
+            const nombre = escaparHTML(user.nombre);
+            return `
+                <div class="podium-card ${clase} ${isCurrent ? 'is-current-user' : ''}">
+                    <div class="podium-badge">${insignia}</div>
+                    <div class="podium-avatar">${escaparHTML(getInitials(user.nombre))}</div>
+                    <div class="podium-name" title="${nombre}">
+                        ${nombre} ${isCurrent ? '<span class="you-badge">Tú</span>' : ''}
+                    </div>
+                    <div class="podium-xp">${xpTag(user.weeklyXP)}</div>
+                </div>
+            `;
+        };
+
+        // Renderizar el podio (Top 3): 2º a la izquierda, 1º al centro (elevado), 3º a la derecha
         const renderPodium = () => {
-            const first = top10[0];
-            const second = top10[1];
-            const third = top10[2];
+            const [first, second, third] = top10;
 
             let html = '<div class="podium-container">';
-
-            // 2do Lugar (Izquierda)
-            if (second) {
-                const isCurrent = currentUid && second.uid === currentUid;
-                html += `
-                    <div class="podium-card second ${isCurrent ? 'is-current-user' : ''}">
-                        <div class="podium-badge">🥈</div>
-                        <div class="podium-avatar">${getInitials(second.nombre)}</div>
-                        <div class="podium-name" title="${second.nombre}">
-                            ${second.nombre} ${isCurrent ? '<span class="you-badge">Tú</span>' : ''}
-                        </div>
-                        <div class="podium-xp">⚡ ${second.weeklyXP} XP</div>
-                    </div>
-                `;
-            }
-
-            // 1er Lugar (Centro, Elevado)
-            if (first) {
-                const isCurrent = currentUid && first.uid === currentUid;
-                html += `
-                    <div class="podium-card first ${isCurrent ? 'is-current-user' : ''}">
-                        <div class="podium-badge">👑</div>
-                        <div class="podium-avatar">${getInitials(first.nombre)}</div>
-                        <div class="podium-name" title="${first.nombre}">
-                            ${first.nombre} ${isCurrent ? '<span class="you-badge">Tú</span>' : ''}
-                        </div>
-                        <div class="podium-xp">⚡ ${first.weeklyXP} XP</div>
-                    </div>
-                `;
-            }
-
-            // 3er Lugar (Derecha)
-            if (third) {
-                const isCurrent = currentUid && third.uid === currentUid;
-                html += `
-                    <div class="podium-card third ${isCurrent ? 'is-current-user' : ''}">
-                        <div class="podium-badge">🥉</div>
-                        <div class="podium-avatar">${getInitials(third.nombre)}</div>
-                        <div class="podium-name" title="${third.nombre}">
-                            ${third.nombre} ${isCurrent ? '<span class="you-badge">Tú</span>' : ''}
-                        </div>
-                        <div class="podium-xp">⚡ ${third.weeklyXP} XP</div>
-                    </div>
-                `;
-            }
-
+            if (second) html += podiumCard(second, 'second', ico(iconMedalSilver, 34));
+            if (first) html += podiumCard(first, 'first', ico(iconCrown, 38));
+            if (third) html += podiumCard(third, 'third', ico(iconMedalBronze, 34));
             html += '</div>';
             return html;
         };
@@ -200,16 +186,16 @@ export default async function mostrarLeaderboard() {
                     <div class="ranking-item ${isCurrent ? 'is-current-user' : ''}">
                         <div class="ranking-left">
                             <span class="ranking-pos">#${rankNumber}</span>
-                            <div class="ranking-avatar">${getInitials(user.nombre)}</div>
+                            <div class="ranking-avatar">${escaparHTML(getInitials(user.nombre))}</div>
                             <div class="ranking-info">
                                 <span class="ranking-name">
-                                    ${user.nombre}
+                                    ${escaparHTML(user.nombre)}
                                     ${isCurrent ? '<span class="you-badge">Tú</span>' : ''}
                                 </span>
                             </div>
                         </div>
                         <div class="ranking-xp">
-                            ⚡ ${user.weeklyXP} XP
+                            ${xpTag(user.weeklyXP)}
                         </div>
                     </div>
                 `;
@@ -236,7 +222,7 @@ export default async function mostrarLeaderboard() {
                         </div>
                     </div>
                     <div class="ranking-xp">
-                        ⚡ ${currentUserData.weeklyXP} XP
+                        ${xpTag(currentUserData.weeklyXP)}
                     </div>
                 </div>
             `;
@@ -247,7 +233,7 @@ export default async function mostrarLeaderboard() {
             ${decoraciones}
             <div class="leaderboard-page">
                 <header class="leaderboard-header">
-                    <div class="badge-tag">🏆 Ranking Semanal</div>
+                    ${badgeRanking}
                     <h1>Tabla de Clasificación</h1>
                     <p>Los 10 usuarios con más experiencia acumulada esta semana.</p>
                 </header>
@@ -264,7 +250,7 @@ export default async function mostrarLeaderboard() {
             ${decoraciones}
             <div class="leaderboard-page">
                 <header class="leaderboard-header">
-                    <div class="badge-tag">🏆 Ranking Semanal</div>
+                    ${badgeRanking}
                     <h1>Tabla de Clasificación</h1>
                 </header>
                 <div class="leaderboard-loading">
@@ -277,4 +263,3 @@ export default async function mostrarLeaderboard() {
         `;
     }
 }
-
