@@ -1,4 +1,4 @@
-import{C as e,D as t,E as n,O as r,S as i,T as a,_ as o,a as s,c,d as l,f as u,g as d,i as f,k as p,l as m,m as h,n as g,o as _,p as v,r as y,s as b,t as x,v as ee,w as te,x as S,y as C}from"./navbar-DfQSMr8V.js";var w,ne=p((()=>{w=`/assets/cloud-BfuKBVL3.svg`})),T,re=p((()=>{T=`/assets/python-logo-yw-cT82l.png`})),ie=p((()=>{}));async function ae(){let e=document.getElementById(`app`);if(!e){console.error(`❌ No se encontró #app`);return}let t=y.currentUser;if(!t)window.location.hash=`#login`;else try{let n=h(f,`usuarios`,t.uid),r=await c(n),i=t.email;if(r.exists()){let e=r.data();e.nombre&&(i=e.nombre)}let a=h(f,`progreso`,t.uid),o=await c(a),s=0;o.exists()&&(s=o.data().xp||0),e.innerHTML=`
+import{C as e,D as t,E as n,O as r,S as i,T as a,_ as o,a as s,c,d as l,f as u,g as d,i as f,k as p,l as m,m as h,n as g,o as _,p as v,r as y,s as b,t as x,v as ee,w as te,x as S,y as C}from"./navbar-BW6r3kH2.js";var w,ne=p((()=>{w=`/assets/cloud-8R_JM_cw.svg`})),T,re=p((()=>{T=`/assets/python-logo-yw-cT82l.png`})),ie=p((()=>{}));async function ae(){let e=document.getElementById(`app`);if(!e){console.error(`❌ No se encontró #app`);return}let t=y.currentUser;if(!t)window.location.hash=`#login`;else try{let n=h(f,`usuarios`,t.uid),r=await c(n),i=t.email;if(r.exists()){let e=r.data();e.nombre&&(i=e.nombre)}let a=h(f,`progreso`,t.uid),o=await c(a),s=0;o.exists()&&(s=o.data().xp||0),e.innerHTML=`
 
             <div class="stars">
 
@@ -337,7 +337,7 @@ import{C as e,D as t,E as n,O as r,S as i,T as a,_ as o,a as s,c,d as l,f as u,g
         <span>✧</span>
         <span>✦</span>
     </div>
-`})),W,Se=p((()=>{W=`/assets/icon-trophy-f5GcZDnc.svg`})),G,Ce=p((()=>{G=`/assets/icon-crown-v8fZrAlQ.svg`})),K,we=p((()=>{K=`/assets/icon-medal-silver-wTNTq_xV.svg`})),q,Te=p((()=>{q=`/assets/icon-medal-bronze-88qPKuvn.svg`})),J,Ee=p((()=>{J=`/assets/icon-bolt-Djolw7Mj.svg`})),Y=p((()=>{}));async function X(){let e=document.getElementById(`app`);if(!e){console.error(`❌ No se encontró #app`);return}let t=`
+`})),W,Se=p((()=>{W=`/assets/icon-trophy-_nrI0KRo.svg`})),G,Ce=p((()=>{G=`/assets/icon-crown-Bx8THNlA.svg`})),K,we=p((()=>{K=`/assets/icon-medal-silver-3eXkem-k.svg`})),q,Te=p((()=>{q=`/assets/icon-medal-bronze-g5EEoSdK.svg`})),J,Ee=p((()=>{J=`/assets/icon-bolt-DGw9VSpb.svg`})),Y=p((()=>{}));async function X(){let e=document.getElementById(`app`);if(!e){console.error(`❌ No se encontró #app`);return}let t=`
         <img src="${w}" class="cloud cloud-1" alt="Nube decorativa">
         <img src="${w}" class="cloud cloud-2" alt="Nube decorativa">
         <div class="stars">
