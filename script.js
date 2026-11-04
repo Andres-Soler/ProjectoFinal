@@ -1,3 +1,5 @@
+import heartFull from './assets/images/icon-heart.svg';
+import heartEmpty from './assets/images/icon-heart-empty.svg';
 import { auth, db } from './src/firebaseConfig.js';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -1393,15 +1395,15 @@ function resetLives() {
 
 
     if (l1) {
-        l1.src = "assets/ui/heart-full.png";
+        l1.src = heartFull;
     }
 
     if (l2) {
-        l2.src = "assets/ui/heart-full.png";
+        l2.src = heartFull;
     }
 
     if (l3) {
-        l3.src = "assets/ui/heart-full.png";
+        l3.src = heartFull;
     }
 }
 
@@ -1423,7 +1425,7 @@ function loseLife() {
     if (heart) {
 
         heart.src =
-            "assets/ui/heart-empty.png";
+            heartEmpty;
     }
 
 
