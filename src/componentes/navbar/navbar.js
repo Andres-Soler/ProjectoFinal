@@ -28,7 +28,13 @@ const DESTINOS = {
 
 function esPaginaApp() {
     const path = window.location.pathname.toLowerCase();
-    return path.endsWith('kodicode.html') || path.endsWith('duoprog.html');
+    return (
+        path.endsWith('index.html') ||
+        path.endsWith('kodicode.html') ||
+        path.endsWith('duoprog.html') ||
+        path.endsWith('/') ||
+        path === ''
+    );
 }
 
 // Navegación universal (SPA + multipágina)
@@ -49,7 +55,7 @@ function navegar(destino) {
         if (esPaginaApp()) {
             window.location.hash = destino;
         } else {
-            window.location.href = `kodicode.html${destino}`;
+            window.location.href = `index.html${destino}`;
         }
     } else if (!path.endsWith(destino.toLowerCase())) {
         window.location.href = destino;
@@ -62,6 +68,8 @@ async function cerrarSesion() {
 
         if (esPaginaApp()) {
             window.location.hash = '#login';
+        } else {
+            window.location.href = 'index.html#login';
         }
     } catch (error) {
         console.error('Error al cerrar sesión:', error);

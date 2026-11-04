@@ -7,7 +7,24 @@ import mostrarNavbar from './src/componentes/navbar/navbar.js';
 if (document.getElementById('navbar')) {
     mostrarNavbar();
 }
+// ===============================
+// KODICODE SOUND EFFECTS
+// ===============================
 
+const sounds = {
+    click: new Audio("assets/sounds/click.mp3"),
+    correct: new Audio("assets/sounds/correct.mp3"),
+    wrong: new Audio("assets/sounds/wrong.mp3")
+};
+
+function playSound(soundName) {
+    const sound = sounds[soundName];
+
+    if (!sound) return;
+
+    sound.currentTime = 0;
+    sound.play().catch(() => {});
+}
 
 // ============================================================
 // GLOBAL VARIABLES
@@ -24,7 +41,11 @@ let currentActivityIndex = 0;
 let selectedAnswer = null;
 let currentQuestion = null;
 
-
+document.addEventListener("click", (event) => {
+    if (event.target.closest("button")) {
+        playSound("click");
+    }
+});
 // ============================================================
 // LESSON DATA
 // ============================================================
@@ -58,7 +79,14 @@ const lessons = {
                     "Instalar videojuegos y aplicaciones"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "Eso corresponde al hardware o electrónica física. Programar es escribir instrucciones lógicas para el software.",
+                    "Navegar por internet es usar una aplicación (el navegador), no programar ni crear instrucciones.",
+                    "Instalar aplicaciones es una tarea de usuario; programar consiste en crear las instrucciones de esos programas."
+                ]
             },
 
             {
@@ -84,7 +112,14 @@ const lessons = {
                     "Un error de sintaxis"
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    "La función print() precisamente sirve para mostrar datos en la pantalla, no para guardarlos en silencio.",
+                    null,
+                    "print() muestra únicamente lo que está dentro de los paréntesis y comillas, no el nombre de la función.",
+                    "La sintaxis es 100% válida: print con paréntesis y el texto entre comillas."
+                ]
             },
 
             {
@@ -101,7 +136,14 @@ const lessons = {
                     "Porque le falta un punto y coma al final"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "En Python los comandos van en minúsculas (print, no PRINT). Usar mayúsculas causaría error.",
+                    "Sí se puede mostrar texto con print(), pero siempre debe estar envuelto entre comillas.",
+                    "En Python no se necesitan puntos y comas al final de las líneas."
+                ]
             },
 
             {
@@ -127,7 +169,14 @@ const lessons = {
                     "--"
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    "// se usa en lenguajes como C++, Java o JavaScript. En Python se usa el numeral (#).",
+                    null,
+                    "/* se utiliza para comentarios multilínea en lenguajes como C o CSS. En Python se usa #.",
+                    "-- se usa para comentarios en SQL, no en Python."
+                ]
             },
 
             {
@@ -172,7 +221,9 @@ const lessons = {
                     'print("Hola, mundo! ")',
                     'print("Hola mundo!")',
                     "print('Hola mundo!')"
-                ]
+                ],
+
+                feedback: 'Recuerda usar la función print con paréntesis y texto entre comillas: print("Hola, mundo!")'
             }
 
         ]
@@ -206,7 +257,14 @@ const lessons = {
                     "Crear un nuevo archivo de texto en el disco duro"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "Las variables almacenan información en memoria, no afectan la conexión de red.",
+                    "Las variables no controlan el hardware de la pantalla.",
+                    "Las variables guardan información temporalmente en la memoria RAM, no crean archivos en el disco."
+                ]
             },
 
             {
@@ -230,7 +288,14 @@ const lessons = {
                     "energia == 100"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "En Python el nombre de la variable siempre va a la izquierda y el valor a la derecha del signo =.",
+                    "'guardar en' no es sintaxis de Python; la asignación se realiza con el signo igual (=).",
+                    "El doble igual (==) se usa para comparar si dos valores son iguales, no para asignar un valor."
+                ]
             },
 
             {
@@ -247,7 +312,14 @@ const lessons = {
                     "1"
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    "vidas comenzó en 3, pero luego se ejecutó vidas = vidas - 1, restando 1 a su valor.",
+                    null,
+                    "print(vidas) evalúa el valor contenido en la variable y muestra el número, no la palabra literal.",
+                    "Solo se restó 1 una vez a 3: 3 - 1 = 2."
+                ]
             },
 
             {
@@ -264,7 +336,14 @@ const lessons = {
                     "print(nombre) produce un error porque le faltan comillas"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    'Las comillas indican texto literal. print("nombre") siempre mostrará la palabra "nombre".',
+                    "Sin comillas, Python busca la variable nombre y muestra su valor guardado (\"Sara\").",
+                    "print(nombre) es completamente válido porque 'nombre' es una variable creada previamente."
+                ]
             },
 
             {
@@ -317,7 +396,9 @@ const lessons = {
                     "nombre = 'Alex'",
                     'nombre="Alex"',
                     "nombre='Alex'"
-                ]
+                ],
+
+                feedback: 'Recuerda: nombre a la izquierda, signo =, y "Alex" entre comillas: nombre = "Alex"'
             }
 
         ]
@@ -351,7 +432,14 @@ const lessons = {
                     "bool (Booleano)"
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "int es para números enteros sin comillas. Al tener comillas, es una cadena de texto (str).",
+                    "float es para números decimales. Todo dato entre comillas es de tipo str.",
+                    "bool solo puede ser True o False. Todo dato envuelto en comillas es un str."
+                ]
             },
 
             {
@@ -366,7 +454,14 @@ const lessons = {
                     "bool (Booleano)"
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    "float lleva punto decimal (por ejemplo 42.0). El número 42 sin punto es un entero (int).",
+                    null,
+                    "str siempre lleva comillas (por ejemplo \"42\"). Sin comillas es un int.",
+                    "bool solo admite True o False."
+                ]
             },
 
             {
@@ -383,7 +478,14 @@ const lessons = {
                     "bool (Booleano)"
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    "int es para números enteros. 19.99 tiene un punto decimal, por lo que es de tipo float.",
+                    null,
+                    "str requiere comillas (\"19.99\"). Aquí es un número real con punto decimal.",
+                    "bool solo almacena True o False."
+                ]
             },
 
             {
@@ -398,7 +500,14 @@ const lessons = {
                     '"Verdadero" y "Falso"'
                 ],
 
-                correct: 0
+                correct: 0,
+
+                feedback: [
+                    null,
+                    "En Python los booleanos son sensibles a mayúsculas: deben ser True y False con inicial mayúscula.",
+                    "1 y 0 son enteros (int). En Python el tipo bool usa formalmente True y False.",
+                    '"Verdadero" y "Falso" son cadenas de texto (str) por estar entre comillas.'
+                ]
             },
 
             {
@@ -424,7 +533,14 @@ const lessons = {
                     '"a + b"'
                 ],
 
-                correct: 1
+                correct: 1,
+
+                feedback: [
+                    'a y b son cadenas de texto ("10" y "20") porque tienen comillas. El operador + une los textos dando "1020".',
+                    null,
+                    "Ambas variables son del mismo tipo (str), por lo que unirlas con + es totalmente válido.",
+                    "print(a + b) evalúa los valores de las variables y los concatena, no imprime los nombres literales."
+                ]
             },
 
             {
@@ -466,9 +582,464 @@ const lessons = {
                 expected: [
                     "edad = 19",
                     "edad=19"
-                ]
+                ],
+
+                feedback: 'Recuerda asignar un entero sin comillas usando el operador =: edad = 19'
             }
 
+        ]
+    },
+
+    // ============================================================
+    // DESARROLLO WEB
+    // ============================================================
+
+    webIntro: {
+        title: "Introducción a la Web",
+        course: "web",
+        activities: [
+            {
+                type: "info",
+                title: "¿Cómo funciona la Web?",
+                text: "La World Wide Web es un sistema global que nos permite ver e interactuar con páginas por internet. Cuando escribes una dirección en tu navegador (como Chrome o Firefox), tu dispositivo actúa como cliente y envía una petición a una computadora especial llamada servidor, la cual responde enviando los archivos que forman la página web para que tu navegador los dibuje."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cuál es la función principal de un navegador web (Chrome, Firefox, Safari)?",
+                answers: [
+                    "Interpretar el código de las páginas y mostrárselo visualmente al usuario",
+                    "Armar y soldar los circuitos físicos de tu computadora",
+                    "Guardar todas las páginas web del mundo en tu disco duro",
+                    "Aumentar físicamente la memoria RAM de tu equipo"
+                ],
+                correct: 0,
+                feedback: [
+                    null,
+                    "Los navegadores son software que interpretan código web, no ensamblan componentes de hardware.",
+                    "Las páginas web se alojan en servidores de internet, no se descargan completas en tu disco duro.",
+                    "Los navegadores consumen memoria para funcionar, no pueden aumentar físicamente la memoria de tu equipo."
+                ]
+            },
+            {
+                type: "info",
+                title: "Las 3 Tecnologías Fundamentales de la Web",
+                text: "Toda página web moderna se construye usando tres lenguajes clave:\n\n1. HTML: Es el esqueleto o estructura (títulos, párrafos, botones, imágenes).\n2. CSS: Es la apariencia o estilo visual (colores, fuentes, márgenes, bordes).\n3. JavaScript: Es el cerebro o interactividad (animaciones, clics, lógica dinámica)."
+            },
+            {
+                type: "multiple-choice",
+                question: "Si comparamos una página web con un edificio, ¿qué parte representaría HTML?",
+                answers: [
+                    "La pintura, la decoración y las cortinas",
+                    "La estructura, vigas y paredes de las habitaciones",
+                    "El ascensor y el sistema eléctrico automático",
+                    "El letrero luminoso de la entrada únicamente"
+                ],
+                correct: 1,
+                feedback: [
+                    "La pintura y decoración corresponden a CSS, que define el estilo estético.",
+                    null,
+                    "El sistema eléctrico y ascensor representan JavaScript, encargado de la dinámica y movimiento.",
+                    "El letrero es solo un elemento individual; HTML conforma toda la estructura completa del edificio."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada tecnología web con su función primordial:",
+                pairs: [
+                    { left: "HTML", right: "Estructura y contenido del sitio" },
+                    { left: "CSS", right: "Colores, fuentes y diseño visual" },
+                    { left: "JavaScript", right: "Interactividad y comportamiento dinámico" },
+                    { left: "Servidor", right: "Computadora que aloja y entrega la página" }
+                ]
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué tecnología se encarga de dar colores, tipografías y diseño a una página web?",
+                answers: [
+                    "HTML",
+                    "CSS",
+                    "SQL",
+                    "Python"
+                ],
+                correct: 1,
+                feedback: [
+                    "HTML define la estructura y el contenido, pero los colores y fuentes los maneja CSS.",
+                    null,
+                    "SQL es para consultar bases de datos, no para diseñar páginas web visualmente.",
+                    "Python es un lenguaje de programación de propósito general, no el lenguaje de estilos web."
+                ]
+            }
+        ]
+    },
+
+    webHtml: {
+        title: "Estructura con HTML",
+        course: "web",
+        activities: [
+            {
+                type: "info",
+                title: "¿Qué son las etiquetas en HTML?",
+                text: "HTML funciona mediante etiquetas rodeadas por los símbolos menor que (<) y mayor que (>).\n\nCasi todas las etiquetas se abren y se cierran con una barra oblicua (/):\n<h1>Título Principal</h1>\n<p>Este es un párrafo de texto.</p>\nEl contenido va en medio de la apertura y el cierre."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cómo se escribe la etiqueta de cierre correcta para un párrafo en HTML?",
+                answers: [
+                    "<p>",
+                    "</p>",
+                    "<close-p>",
+                    "<p>"
+                ],
+                correct: 1,
+                feedback: [
+                    "<p> es la etiqueta de apertura. El cierre siempre lleva la barra diagonal (/): </p>.",
+                    null,
+                    "HTML usa la barra inclinada (/) dentro del nombre original, no palabras como close.",
+                    "La barra debe ser diagonal hacia adelante (/), no barra invertida (\\)."
+                ]
+            },
+            {
+                type: "info",
+                title: "Encabezados y Enlaces",
+                text: "HTML tiene 6 niveles de encabezados: desde <h1> (el más importante y grande) hasta <h6> (el más pequeño).\n\nPara crear enlaces que dirijan a otras páginas usamos la etiqueta <a> (ancla) con el atributo href:\n<a href=\"https://kodicode.com\">Visitar KodiCode</a>"
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cuál es la etiqueta utilizada en HTML para el título principal de una página?",
+                answers: [
+                    "<h1>",
+                    "<title-big>",
+                    "<h6>",
+                    "<heading>"
+                ],
+                correct: 0,
+                feedback: [
+                    null,
+                    "<title-big> no existe en la especificación de HTML.",
+                    "<h6> es el título más pequeño de menor jerarquía; el principal es <h1>.",
+                    "<heading> no es una etiqueta válida de HTML, se usa <h1> hasta <h6>."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada etiqueta HTML con su significado:",
+                pairs: [
+                    { left: "<h1>", right: "Encabezado principal o más importante" },
+                    { left: "<p>", right: "Párrafo de texto regular" },
+                    { left: "<a>", right: "Enlace o hipervínculo a otra página" },
+                    { left: "<button>", right: "Botón interactivo para hacer clic" }
+                ]
+            },
+            {
+                type: "code",
+                question: 'Escribe la etiqueta completa de un título de nivel 1 con el texto "Mi Blog". Ejemplo: <h1>Mi Blog</h1>',
+                expected: [
+                    "<h1>Mi Blog</h1>",
+                    "<h1> Mi Blog </h1>",
+                    "<h1>Mi blog</h1>"
+                ],
+                feedback: 'Recuerda abrir con <h1>, escribir "Mi Blog" y cerrar con </h1>: <h1>Mi Blog</h1>'
+            }
+        ]
+    },
+
+    webCss: {
+        title: "Estilo con CSS",
+        course: "web",
+        activities: [
+            {
+                type: "info",
+                title: "¿Cómo funciona CSS?",
+                text: "CSS (Cascading Style Sheets) le da vida y color a tu HTML. Una regla de CSS tiene un selector (a qué etiqueta queremos darle estilo) y un bloque entre llaves {} con propiedades y valores:\n\nh1 {\n  color: blue;\n  font-size: 24px;\n}\n\nEsto hará que todos los títulos <h1> sean de color azul y de 24 píxeles de tamaño."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué propiedad de CSS se utiliza para cambiar el color del texto?",
+                answers: [
+                    "text-paint",
+                    "color",
+                    "font-background",
+                    "textColor"
+                ],
+                correct: 1,
+                feedback: [
+                    "text-paint no existe en CSS.",
+                    null,
+                    "font-background no existe; para fondo se usa background-color.",
+                    "textColor se usa a veces en JavaScript, pero en CSS la propiedad estándar es 'color'."
+                ]
+            },
+            {
+                type: "info",
+                title: "Fondos y Tamaños",
+                text: "Dos propiedades muy comunes en CSS son:\n• background-color: Cambia el color de fondo de un elemento (ejemplo: background-color: yellow;).\n• font-size: Controla el tamaño de la letra (ejemplo: font-size: 16px;).\n\nRecuerda que cada línea dentro del bloque CSS siempre termina con un punto y coma (;)."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué símbolo separa una propiedad de su valor en una regla CSS (por ejemplo color y red)?",
+                answers: [
+                    "El signo igual (=)",
+                    "Dos puntos (:)",
+                    "Un guión (-)",
+                    "Una flecha (->)"
+                ],
+                correct: 1,
+                feedback: [
+                    "El signo igual (=) se usa en HTML y programación, en CSS se usan dos puntos (:).",
+                    null,
+                    "El guión se usa para unir nombres de propiedades (como font-size), no para separar el valor.",
+                    "Las flechas no forman parte de la sintaxis de reglas CSS."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada propiedad CSS con el aspecto visual que modifica:",
+                pairs: [
+                    { left: "color", right: "Color de las letras o texto" },
+                    { left: "background-color", right: "Color de fondo del elemento" },
+                    { left: "font-size", right: "Tamaño de la tipografía" },
+                    { left: "border", right: "Línea o marco alrededor del elemento" }
+                ]
+            },
+            {
+                type: "code",
+                question: 'Escribe la propiedad CSS para poner el color de texto en rojo. Escribe: color: red;',
+                expected: [
+                    "color: red;",
+                    "color:red;",
+                    "color: red",
+                    "color:red"
+                ],
+                feedback: 'Recuerda escribir la propiedad color seguida de dos puntos y el valor: color: red;'
+            }
+        ]
+    },
+
+    // ============================================================
+    // BASES DE DATOS
+    // ============================================================
+
+    dbIntro: {
+        title: "Introducción a las Bases de Datos",
+        course: "database",
+        activities: [
+            {
+                type: "info",
+                title: "¿Qué es una Base de Datos?",
+                text: "Una base de datos es un almacén digital estructurado para guardar, organizar y consultar grandes cantidades de información de forma rápida y segura.\n\nEn las bases de datos relacionales, los datos se guardan en Tablas compuestas por:\n• Columnas (Campos): El tipo de dato que se guarda (ej: nombre, email, edad).\n• Filas (Registros): Cada entrada individual de un usuario o elemento."
+            },
+            {
+                type: "multiple-choice",
+                question: "En una tabla de base de datos de 'usuarios', ¿qué representa cada fila?",
+                answers: [
+                    "Un usuario individual con toda su información registrada",
+                    "El nombre de la aplicación",
+                    "Un tipo de dato como texto o número",
+                    "El cable que conecta el servidor a internet"
+                ],
+                correct: 0,
+                feedback: [
+                    null,
+                    "El nombre de la aplicación no es un registro en la tabla.",
+                    "Los tipos de datos son definidos por las columnas, cada fila es un usuario concreto.",
+                    "El cable de red es hardware físico de conexión."
+                ]
+            },
+            {
+                type: "info",
+                title: "¿Qué es SQL?",
+                text: "SQL significa Structured Query Language (Lenguaje de Consulta Estructurado). Es el lenguaje universal que usamos para comunicarnos con las bases de datos.\n\nCon SQL podemos:\n1. Consultar y buscar datos.\n2. Guardar nuevos registros.\n3. Actualizar información existente.\n4. Eliminar datos obsoletos."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cuál es el propósito principal del lenguaje SQL?",
+                answers: [
+                    "Hacer animaciones 3D para películas",
+                    "Consultar y gestionar información en bases de datos",
+                    "Diseñar la carcasa física de los servidores",
+                    "Pintar el estilo visual de una página web"
+                ],
+                correct: 1,
+                feedback: [
+                    "SQL no tiene funciones de modelado ni animación 3D.",
+                    null,
+                    "SQL es software de consultas, no ingeniería de hardware ni carcasas.",
+                    "El estilo visual de las páginas web lo maneja CSS, no SQL."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada concepto de bases de datos con su descripción:",
+                pairs: [
+                    { left: "Base de Datos", right: "Sistema organizado para almacenar y consultar datos" },
+                    { left: "Tabla", right: "Estructura de filas y columnas donde residen los datos" },
+                    { left: "Columna", right: "Campo que define una característica (ej: correo)" },
+                    { left: "Fila", right: "Registro individual que representa una entidad" }
+                ]
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cuál de las siguientes opciones se parece más a una tabla de base de datos?",
+                answers: [
+                    "Una hoja de cálculo con columnas con encabezados y filas numeradas",
+                    "Un archivo de música en formato MP3",
+                    "Una foto tomada con un teléfono móvil",
+                    "Un mensaje de audio de WhatsApp"
+                ],
+                correct: 0,
+                feedback: [
+                    null,
+                    "Un archivo MP3 contiene sonido digital comprimido, no registros estructurados.",
+                    "Una foto contiene píxeles de color, no tablas relacionales.",
+                    "Un mensaje de audio es multimedia, no una tabla de datos."
+                ]
+            }
+        ]
+    },
+
+    dbSql: {
+        title: "Consultas con SQL (SELECT)",
+        course: "database",
+        activities: [
+            {
+                type: "info",
+                title: "La instrucción SELECT y FROM",
+                text: "La operación más frecuente en bases de datos es consultar o leer información. Para esto usamos dos palabras clave fundamentales de SQL:\n\n• SELECT: Indica qué columnas queremos ver.\n• FROM: Indica de qué tabla provienen los datos.\n\nEjemplo para ver los nombres de la tabla alumnos:\nSELECT nombre FROM alumnos;"
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué palabra clave de SQL indica qué columnas queremos consultar?",
+                answers: [
+                    "SHOW",
+                    "SELECT",
+                    "GET",
+                    "OBTENER"
+                ],
+                correct: 1,
+                feedback: [
+                    "SHOW se usa en algunos motores para ver metadatos, no para seleccionar columnas de tablas.",
+                    null,
+                    "GET se usa en protocolos HTTP y APIs, en SQL la instrucción estándar es SELECT.",
+                    "Las palabras clave de SQL están en inglés; se usa SELECT."
+                ]
+            },
+            {
+                type: "info",
+                title: "El comodín asterisco (*)",
+                text: "Si deseas ver todas las columnas de una tabla sin tener que escribir los nombres de cada una, usamos el asterisco (*):\n\nSELECT * FROM usuarios;\n\nEsta instrucción traerá absolutamente todas las columnas y filas de la tabla 'usuarios'."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué hace el asterisco (*) en la consulta SELECT * FROM productos;?",
+                answers: [
+                    "Multiplica todos los precios por sí mismos",
+                    "Selecciona todas las columnas de la tabla",
+                    "Borra los productos que tengan errores",
+                    "Crea una copia de seguridad en la nube"
+                ],
+                correct: 1,
+                feedback: [
+                    "En una cláusula SELECT, el asterisco actúa como comodín de 'todas las columnas'.",
+                    null,
+                    "Para borrar se usa DELETE; SELECT únicamente lee y muestra datos.",
+                    "SELECT no crea copias de seguridad de la base de datos."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada componente de una consulta SQL con su función:",
+                pairs: [
+                    { left: "SELECT", right: "Indica las columnas deseadas" },
+                    { left: "*", right: "Comodín para traer todas las columnas" },
+                    { left: "FROM", right: "Indica la tabla de origen" },
+                    { left: ";", right: "Finaliza la sentencia SQL" }
+                ]
+            },
+            {
+                type: "code",
+                question: 'Escribe la consulta SQL para seleccionar todas las columnas de la tabla clientes: SELECT * FROM clientes;',
+                expected: [
+                    "SELECT * FROM clientes;",
+                    "SELECT * FROM clientes",
+                    "select * from clientes;",
+                    "select * from clientes"
+                ],
+                feedback: 'Recuerda usar SELECT *, luego FROM y el nombre de la tabla: SELECT * FROM clientes;'
+            }
+        ]
+    },
+
+    dbWhere: {
+        title: "Filtrar con WHERE",
+        course: "database",
+        activities: [
+            {
+                type: "info",
+                title: "Filtrando datos con WHERE",
+                text: "No siempre queremos ver todos los registros de una tabla. La cláusula WHERE nos permite filtrar filas según una condición:\n\nSELECT * FROM usuarios WHERE edad >= 18;\n\nEsta consulta devolverá únicamente a los usuarios mayores o iguales a 18 años."
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Qué cláusula de SQL se usa para filtrar filas que cumplan una condición específica?",
+                answers: [
+                    "FILTER",
+                    "WHERE",
+                    "SEARCH",
+                    "FIND"
+                ],
+                correct: 1,
+                feedback: [
+                    "FILTER no es la cláusula estándar de SQL para filtrar filas; se usa WHERE.",
+                    null,
+                    "SEARCH no es una palabra reservada estándar en SQL.",
+                    "FIND no se utiliza en consultas SQL estándar."
+                ]
+            },
+            {
+                type: "info",
+                title: "Filtrar por texto en WHERE",
+                text: "Cuando filtramos por un texto en SQL, el valor debe ir envuelto entre comillas simples ('):\n\nSELECT * FROM clientes WHERE pais = 'Colombia';\n\nEn cambio, los números van sin comillas:\nSELECT * FROM productos WHERE precio > 50;"
+            },
+            {
+                type: "multiple-choice",
+                question: "¿Cuál es la consulta SQL correcta para filtrar usuarios cuyo rol sea 'admin'?",
+                answers: [
+                    "SELECT * FROM usuarios WHERE rol = 'admin';",
+                    "SELECT * FROM usuarios WHERE rol = admin;",
+                    "SELECT * FROM usuarios FILTER rol == admin;",
+                    "SELECT rol FROM usuarios WHERE 'admin';"
+                ],
+                correct: 0,
+                feedback: [
+                    null,
+                    "El texto 'admin' debe ir entre comillas simples en SQL; sin comillas se confunde con una columna.",
+                    "FILTER no existe en SQL estándar y las comparaciones de igualdad usan un solo signo igual (=).",
+                    "Se debe especificar la columna a comparar: rol = 'admin'."
+                ]
+            },
+            {
+                type: "matching",
+                question: "Relaciona cada operador de comparación con su significado en WHERE:",
+                pairs: [
+                    { left: "=", right: "Igual a un valor específico" },
+                    { left: ">", right: "Estrictamente mayor que" },
+                    { left: "<", right: "Estrictamente menor que" },
+                    { left: ">=", right: "Mayor o igual que" }
+                ]
+            },
+            {
+                type: "code",
+                question: 'Escribe la consulta para seleccionar todos los usuarios con edad igual a 20: SELECT * FROM usuarios WHERE edad = 20;',
+                expected: [
+                    "SELECT * FROM usuarios WHERE edad = 20;",
+                    "SELECT * FROM usuarios WHERE edad = 20",
+                    "SELECT * FROM usuarios WHERE edad=20;",
+                    "SELECT * FROM usuarios WHERE edad=20",
+                    "select * from usuarios where edad = 20;",
+                    "select * from usuarios where edad = 20"
+                ],
+                feedback: 'Recuerda usar: SELECT * FROM usuarios WHERE edad = 20;'
+            }
         ]
     }
 
@@ -503,11 +1074,22 @@ async function loadProgress(user) {
                 completedLessons =
                     data.cursos?.python?.completedLessons || [];
 
+                const webCompleted = data.cursos?.web?.completedLessons || [];
+                const dbCompleted = data.cursos?.database?.completedLessons || [];
+
                 // Save progress to cache
 
                 localStorage.setItem(
                     `kodicode_completed_${user.uid}`,
                     JSON.stringify(completedLessons)
+                );
+                localStorage.setItem(
+                    `kodicode_completed_web_${user.uid}`,
+                    JSON.stringify(webCompleted)
+                );
+                localStorage.setItem(
+                    `kodicode_completed_db_${user.uid}`,
+                    JSON.stringify(dbCompleted)
                 );
 
                 localStorage.setItem(
@@ -587,56 +1169,136 @@ onAuthStateChanged(auth, async (user) => {
 // ============================================================
 
 function updateCourseMapUI() {
-    const introNode = document.getElementById("lesson-introduction");
-    const varsNode = document.getElementById("lesson-variables");
-    const typesNode = document.getElementById("lesson-dataTypes");
-    const path1 = document.getElementById("path-1");
-    const path2 = document.getElementById("path-2");
-
-    if (!introNode && !varsNode && !typesNode) {
-        return;
-    }
-
     const setNodeStatus = (node, status) => {
         if (!node) return;
         node.classList.remove("completed", "available", "locked");
         node.classList.add(status);
     };
 
+    // Helper to get completed list for current user or guest
+    const getCompletedFor = (courseKey) => {
+        const uid = currentUser ? currentUser.uid : "guest";
+        try {
+            const raw = localStorage.getItem(`kodicode_completed_${courseKey}_${uid}`);
+            if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        return [];
+    };
+
     // --------------------------------------------------------
-    // 1. Introduction (Green if completed, Yellow if available)
+    // 1. PYTHON COURSE MAP
     // --------------------------------------------------------
-    if (completedLessons.includes("introduction")) {
-        setNodeStatus(introNode, "completed");
-        if (path1) path1.classList.add("completed");
-    } else {
-        setNodeStatus(introNode, "available");
-        if (path1) path1.classList.remove("completed");
+    const introNode = document.getElementById("lesson-introduction");
+    const varsNode = document.getElementById("lesson-variables");
+    const typesNode = document.getElementById("lesson-dataTypes");
+    const path1 = document.getElementById("path-1");
+    const path2 = document.getElementById("path-2");
+
+    if (introNode || varsNode || typesNode) {
+        if (completedLessons.includes("introduction")) {
+            setNodeStatus(introNode, "completed");
+            if (path1) path1.classList.add("completed");
+        } else {
+            setNodeStatus(introNode, "available");
+            if (path1) path1.classList.remove("completed");
+        }
+
+        if (completedLessons.includes("variables")) {
+            setNodeStatus(varsNode, "completed");
+            if (path2) path2.classList.add("completed");
+        } else if (completedLessons.includes("introduction")) {
+            setNodeStatus(varsNode, "available");
+            if (path2) path2.classList.remove("completed");
+        } else {
+            setNodeStatus(varsNode, "locked");
+            if (path2) path2.classList.remove("completed");
+        }
+
+        if (completedLessons.includes("dataTypes")) {
+            setNodeStatus(typesNode, "completed");
+        } else if (completedLessons.includes("variables")) {
+            setNodeStatus(typesNode, "available");
+        } else {
+            setNodeStatus(typesNode, "locked");
+        }
     }
 
     // --------------------------------------------------------
-    // 2. Variables (Green if completed, Yellow if available, Red if locked)
+    // 2. DESARROLLO WEB COURSE MAP
     // --------------------------------------------------------
-    if (completedLessons.includes("variables")) {
-        setNodeStatus(varsNode, "completed");
-        if (path2) path2.classList.add("completed");
-    } else if (completedLessons.includes("introduction")) {
-        setNodeStatus(varsNode, "available");
-        if (path2) path2.classList.remove("completed");
-    } else {
-        setNodeStatus(varsNode, "locked");
-        if (path2) path2.classList.remove("completed");
+    const webIntroNode = document.getElementById("lesson-webIntro");
+    const webHtmlNode = document.getElementById("lesson-webHtml");
+    const webCssNode = document.getElementById("lesson-webCss");
+    const webPath1 = document.getElementById("path-web-1");
+    const webPath2 = document.getElementById("path-web-2");
+
+    if (webIntroNode || webHtmlNode || webCssNode) {
+        const webCompleted = getCompletedFor("web");
+        if (webCompleted.includes("webIntro")) {
+            setNodeStatus(webIntroNode, "completed");
+            if (webPath1) webPath1.classList.add("completed");
+        } else {
+            setNodeStatus(webIntroNode, "available");
+            if (webPath1) webPath1.classList.remove("completed");
+        }
+
+        if (webCompleted.includes("webHtml")) {
+            setNodeStatus(webHtmlNode, "completed");
+            if (webPath2) webPath2.classList.add("completed");
+        } else if (webCompleted.includes("webIntro")) {
+            setNodeStatus(webHtmlNode, "available");
+            if (webPath2) webPath2.classList.remove("completed");
+        } else {
+            setNodeStatus(webHtmlNode, "locked");
+            if (webPath2) webPath2.classList.remove("completed");
+        }
+
+        if (webCompleted.includes("webCss")) {
+            setNodeStatus(webCssNode, "completed");
+        } else if (webCompleted.includes("webHtml")) {
+            setNodeStatus(webCssNode, "available");
+        } else {
+            setNodeStatus(webCssNode, "locked");
+        }
     }
 
     // --------------------------------------------------------
-    // 3. Data Types (Green if completed, Yellow if available, Red if locked)
+    // 3. BASES DE DATOS COURSE MAP
     // --------------------------------------------------------
-    if (completedLessons.includes("dataTypes")) {
-        setNodeStatus(typesNode, "completed");
-    } else if (completedLessons.includes("variables")) {
-        setNodeStatus(typesNode, "available");
-    } else {
-        setNodeStatus(typesNode, "locked");
+    const dbIntroNode = document.getElementById("lesson-dbIntro");
+    const dbSqlNode = document.getElementById("lesson-dbSql");
+    const dbWhereNode = document.getElementById("lesson-dbWhere");
+    const dbPath1 = document.getElementById("path-db-1");
+    const dbPath2 = document.getElementById("path-db-2");
+
+    if (dbIntroNode || dbSqlNode || dbWhereNode) {
+        const dbCompleted = getCompletedFor("db");
+        if (dbCompleted.includes("dbIntro")) {
+            setNodeStatus(dbIntroNode, "completed");
+            if (dbPath1) dbPath1.classList.add("completed");
+        } else {
+            setNodeStatus(dbIntroNode, "available");
+            if (dbPath1) dbPath1.classList.remove("completed");
+        }
+
+        if (dbCompleted.includes("dbSql")) {
+            setNodeStatus(dbSqlNode, "completed");
+            if (dbPath2) dbPath2.classList.add("completed");
+        } else if (dbCompleted.includes("dbIntro")) {
+            setNodeStatus(dbSqlNode, "available");
+            if (dbPath2) dbPath2.classList.remove("completed");
+        } else {
+            setNodeStatus(dbSqlNode, "locked");
+            if (dbPath2) dbPath2.classList.remove("completed");
+        }
+
+        if (dbCompleted.includes("dbWhere")) {
+            setNodeStatus(dbWhereNode, "completed");
+        } else if (dbCompleted.includes("dbSql")) {
+            setNodeStatus(dbWhereNode, "available");
+        } else {
+            setNodeStatus(dbWhereNode, "locked");
+        }
     }
 }
 
@@ -666,35 +1328,49 @@ const currentLesson =
 // ============================================================
 
 function openLesson(lesson) {
+    const uid = currentUser ? currentUser.uid : "guest";
+    const getCompleted = (prefix) => {
+        try {
+            const raw = localStorage.getItem(`kodicode_completed_${prefix}_${uid}`);
+            return raw ? JSON.parse(raw) : [];
+        } catch (e) {
+            return [];
+        }
+    };
 
-    if (
-        lesson === "variables" &&
-        !completedLessons.includes("introduction")
-    ) {
-
-        alert(
-            "Debes completar la lección de 'Introducción a Python' primero para desbloquear esta."
-        );
-
+    // Python prerequisites
+    if (lesson === "variables" && !completedLessons.includes("introduction")) {
+        alert("Debes completar la lección de 'Introducción a Python' primero para desbloquear esta.");
+        return;
+    }
+    if (lesson === "dataTypes" && !completedLessons.includes("variables")) {
+        alert("Debes completar la lección de 'Variables en Python' primero para desbloquear esta.");
         return;
     }
 
-
-    if (
-        lesson === "dataTypes" &&
-        !completedLessons.includes("variables")
-    ) {
-
-        alert(
-            "Debes completar la lección de 'Variables en Python' primero para desbloquear esta."
-        );
-
+    // Web prerequisites
+    const webDone = getCompleted("web");
+    if (lesson === "webHtml" && !webDone.includes("webIntro")) {
+        alert("Debes completar 'Introducción a la Web' primero para desbloquear esta.");
+        return;
+    }
+    if (lesson === "webCss" && !webDone.includes("webHtml")) {
+        alert("Debes completar 'Estructura con HTML' primero para desbloquear esta.");
         return;
     }
 
+    // Database prerequisites
+    const dbDone = getCompleted("db");
+    if (lesson === "dbSql" && !dbDone.includes("dbIntro")) {
+        alert("Debes completar 'Introducción a las Bases de Datos' primero para desbloquear esta.");
+        return;
+    }
+    if (lesson === "dbWhere" && !dbDone.includes("dbSql")) {
+        alert("Debes completar 'Consultas con SQL' primero para desbloquear esta.");
+        return;
+    }
 
-    window.location.href =
-        "lesson.html?lesson=" + lesson;
+    window.location.href = "lesson.html?lesson=" + lesson;
 }
 
 
@@ -764,6 +1440,28 @@ function loseLife() {
 
         showGameOver();
     }
+    // Flash all hearts red when losing a life
+const hearts = [
+    document.getElementById("life-1"),
+    document.getElementById("life-2"),
+    document.getElementById("life-3")
+];
+
+hearts.forEach(heart => {
+    heart.classList.remove("damage-flash");
+
+    // Restart the animation
+    void heart.offsetWidth;
+
+    heart.classList.add("damage-flash");
+});
+
+// Remove the effect after it finishes
+setTimeout(() => {
+    hearts.forEach(heart => {
+        heart.classList.remove("damage-flash");
+    });
+}, 700);
 }
 
 
@@ -865,6 +1563,8 @@ function startLesson() {
 // ============================================================
 
 function showActivity() {
+
+    limpiarFeedback();
 
     const activity =
         currentLesson.activities[
@@ -1192,6 +1892,8 @@ function createQuestion(questionData) {
             button.onclick =
                 function () {
 
+                    limpiarFeedback();
+
                     selectedAnswer =
                         index;
 
@@ -1225,6 +1927,55 @@ function createQuestion(questionData) {
 
 
 // ============================================================
+// QUESTION FEEDBACK (WRONG ANSWER FEEDBACK)
+// ============================================================
+
+function mostrarFeedback(mensaje, esError = true) {
+    let feedbackEl = document.getElementById("question-feedback");
+    const checkBtn = document.querySelector(".check-button");
+
+    if (!feedbackEl) {
+        feedbackEl = document.createElement("div");
+        feedbackEl.id = "question-feedback";
+        feedbackEl.className = "question-feedback";
+        feedbackEl.setAttribute("role", "alert");
+        if (checkBtn && checkBtn.parentNode) {
+            checkBtn.parentNode.insertBefore(feedbackEl, checkBtn);
+        } else {
+            const questionSec = document.querySelector(".question");
+            if (questionSec) questionSec.appendChild(feedbackEl);
+        }
+    }
+
+    feedbackEl.innerHTML = `
+        <div class="feedback-content ${esError ? 'feedback-error' : 'feedback-success'}">
+            <span class="feedback-icon">${esError ? '⚠️' : '✅'}</span>
+            <span class="feedback-text">${mensaje}</span>
+        </div>
+    `;
+    feedbackEl.style.display = "block";
+
+    if (checkBtn && esError) {
+        checkBtn.classList.add("check-button-error");
+        checkBtn.textContent = "INCORRECTO — INTENTA DE NUEVO";
+    }
+}
+
+function limpiarFeedback() {
+    const feedbackEl = document.getElementById("question-feedback");
+    if (feedbackEl) {
+        feedbackEl.style.display = "none";
+        feedbackEl.innerHTML = "";
+    }
+    const checkBtn = document.querySelector(".check-button");
+    if (checkBtn) {
+        checkBtn.classList.remove("check-button-error");
+        checkBtn.textContent = "COMPROBAR";
+    }
+}
+
+
+// ============================================================
 // CHECK MULTIPLE CHOICE ANSWER
 // ============================================================
 
@@ -1242,14 +1993,31 @@ function checkAnswer() {
     ) {
 
         console.log("Correct!");
+        playSound("correct");
+
+        limpiarFeedback();
 
         nextActivity();
 
     } else {
+        playSound("wrong");
 
         console.log("Wrong!");
 
         loseLife();
+
+        let mensajeFeedback = "Respuesta incorrecta. ¡Inténtalo de nuevo!";
+        if (currentQuestion && currentQuestion.feedback) {
+            if (Array.isArray(currentQuestion.feedback) && currentQuestion.feedback[selectedAnswer]) {
+                mensajeFeedback = currentQuestion.feedback[selectedAnswer];
+            } else if (typeof currentQuestion.feedback === "object" && currentQuestion.feedback[selectedAnswer]) {
+                mensajeFeedback = currentQuestion.feedback[selectedAnswer];
+            } else if (typeof currentQuestion.feedback === "string") {
+                mensajeFeedback = currentQuestion.feedback;
+            }
+        }
+
+        mostrarFeedback(mensajeFeedback);
     }
 }
 
@@ -1597,6 +2365,8 @@ function showMatching(activity) {
 
                         loseLife();
 
+                        mostrarFeedback("Esa relación no es correcta. ¡Intenta unir la opción adecuada!");
+
 
                         selectedLeft =
                             null;
@@ -1747,6 +2517,10 @@ function showCodeExercise(activity) {
 
     editor.value = "";
 
+    editor.oninput = function () {
+        limpiarFeedback();
+    };
+
 
     // CHECK code
 
@@ -1775,6 +2549,8 @@ function showCodeExercise(activity) {
                         "Correct!"
                     );
 
+                    limpiarFeedback();
+
                     nextActivity();
 
                 } else {
@@ -1784,6 +2560,11 @@ function showCodeExercise(activity) {
                     );
 
                     loseLife();
+
+                    mostrarFeedback(
+                        activity.feedback ||
+                        "El código no coincide con lo esperado. Revisa bien las instrucciones, comillas y sintaxis."
+                    );
                 }
             };
     }
@@ -2033,36 +2814,43 @@ async function completeLesson() {
                 }
 
 
-                // Avoid duplicates
+                // Determine course
+                let courseKey = "python";
+                let firestoreField = "cursos.python.completedLessons";
+                let cachePrefix = "";
 
-                if (
-                    !existingCompleted.includes(
-                        currentKey
-                    )
-                ) {
-
-                    existingCompleted.push(
-                        currentKey
-                    );
+                if (currentKey.startsWith("web")) {
+                    courseKey = "web";
+                    firestoreField = "cursos.web.completedLessons";
+                    cachePrefix = "web_";
+                    existingCompleted = data.cursos?.web?.completedLessons || [];
+                } else if (currentKey.startsWith("db")) {
+                    courseKey = "database";
+                    firestoreField = "cursos.database.completedLessons";
+                    cachePrefix = "db_";
+                    existingCompleted = data.cursos?.database?.completedLessons || [];
                 }
 
+                // Avoid duplicates
+                if (!existingCompleted.includes(currentKey)) {
+                    existingCompleted.push(currentKey);
+                }
 
                 // Save to Firestore
+                const updatePayload = {
+                    xp: currentXP + 25,
+                    weeklyXP: currentWeeklyXP + 25
+                };
+                updatePayload[firestoreField] = existingCompleted;
 
-                await updateDoc(
-                    progresoRef,
-                    {
+                await updateDoc(progresoRef, updatePayload);
 
-                        xp:
-                            currentXP + 25,
-
-                        weeklyXP:
-                            currentWeeklyXP + 25,
-
-                        "cursos.python.completedLessons":
-                            existingCompleted
-                    }
-                );
+                if (cachePrefix) {
+                    localStorage.setItem(
+                        `kodicode_completed_${cachePrefix}${currentUser.uid}`,
+                        JSON.stringify(existingCompleted)
+                    );
+                }
 
 
                 // Update cache
@@ -2168,6 +2956,8 @@ async function completeLesson() {
 
 function nextActivity() {
 
+    limpiarFeedback();
+
     currentActivityIndex++;
 
     showActivity();
@@ -2230,14 +3020,16 @@ const exitBtn =
     );
 
 
+function getTargetCoursePage() {
+    if (lessonId && lessonId.startsWith("web")) return "web.html";
+    if (lessonId && lessonId.startsWith("db")) return "database.html";
+    return "python.html";
+}
+
 if (exitBtn) {
-
-    exitBtn.onclick =
-        function () {
-
-            window.location.href =
-                "index.html";
-        };
+    exitBtn.onclick = function () {
+        window.location.href = getTargetCoursePage();
+    };
 }
 
 
@@ -2246,9 +3038,7 @@ if (exitBtn) {
 // ============================================================
 
 function goBackToCourse() {
-
-    window.location.href =
-        "index.html";
+    window.location.href = getTargetCoursePage();
 }
 
 
@@ -2275,6 +3065,12 @@ window.finishLesson =
 
 window.completeLesson =
     completeLesson;
+
+window.mostrarFeedback =
+    mostrarFeedback;
+
+window.limpiarFeedback =
+    limpiarFeedback;
 
 
 // ============================================================

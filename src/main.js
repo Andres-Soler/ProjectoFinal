@@ -41,6 +41,10 @@ async function mostrarPagina(usuario) {
 
 
     // User IS logged in
+    if (!window.location.hash || window.location.hash === '#login' || window.location.hash === '#registro') {
+        window.location.hash = '#inicio';
+        return;
+    }
 
     switch (window.location.hash) {
 

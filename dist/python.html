@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="/assets/kodicode-mascot-BOs5CTBs.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <title>Python Fundamentals - KodiCode</title>
+  <script type="module" crossorigin src="/assets/python-Bw90PJLi.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/navbar-DfQSMr8V.js">
+  <link rel="modulepreload" crossorigin href="/assets/script-BdfXTu7g.js">
+  <link rel="stylesheet" crossorigin href="/assets/navbar-U0PAC_ig.css">
+  <link rel="stylesheet" crossorigin href="/assets/style-AmOtEjA8.css">
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <h1>Python Fundamentals</h1>
+
+    <main class="course-map">
+        <!-- Node 1: Introduction (Left) -->
+        <div class="lesson left available" id="lesson-introduction">
+            <button class="lesson-button" onclick="openLesson('introduction')" aria-label="Introducción">
+                <span class="node-icon">
+                    <img src="/assets/python-logo-yw-cT82l.png" alt="Python Logo" class="python-logo-icon">
+                </span>
+            </button>
+            <h2>Introducción</h2>
+            <p>Aprende qué es programar</p>
+        </div>
+
+        <!-- Path 1: Connects Introduction to Variables -->
+        <div class="path path-right" id="path-1"></div>
+
+        <!-- Node 2: Variables (Right) -->
+        <div class="lesson right locked" id="lesson-variables">
+            <button class="lesson-button" onclick="openLesson('variables')" aria-label="Variables">
+                <span class="node-icon">📦</span>
+            </button>
+            <h2>Variables</h2>
+            <p>Aprende a guardar información</p>
+        </div>
+
+        <!-- Path 2: Connects Variables to Data Types -->
+        <div class="path path-left" id="path-2"></div>
+
+        <!-- Node 3: Data Types (Left) -->
+        <div class="lesson left locked" id="lesson-dataTypes">
+            <button class="lesson-button" onclick="openLesson('dataTypes')" aria-label="Tipos de Datos">
+                <span class="node-icon">🔤</span>
+            </button>
+            <h2>Tipos de Datos</h2>
+            <p>Conoce los tipos de datos básicos</p>
+        </div>
+    </main>
+
+</body>
+
+</html>

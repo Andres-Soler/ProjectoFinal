@@ -221,6 +221,12 @@ export default function mostrarRegistro() {
 
             form.reset();
 
+            window.location.hash = '#inicio';
+            const path = window.location.pathname.toLowerCase();
+            if (!path.endsWith('index.html') && !path.endsWith('kodicode.html') && path !== '/' && path !== '') {
+                window.location.href = 'index.html#inicio';
+            }
+
 
 
 

@@ -9,6 +9,7 @@ export default defineConfig({
         kodicode: resolve(__dirname, 'kodicode.html'),
         duoprog: resolve(__dirname, 'duoprog.html'),
         courses: resolve(__dirname, 'courses.html'),
+        python: resolve(__dirname, 'python.html'),
         lesson: resolve(__dirname, 'lesson.html'),
       }
     }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="assets/images/kodicode-mascot.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Desarrollo Web - KodiCode</title>
+</head>
+
+<body>
+
+    <div id="navbar"></div>
+
+    <h1>Desarrollo Web</h1>
+
+    <main class="course-map">
+        <!-- Lección 1: Introducción a la Web -->
+        <div class="lesson left available" id="lesson-webIntro">
+            <button class="lesson-button" onclick="openLesson('webIntro')" aria-label="Introducción a la Web">
+                <span class="node-icon">🌐</span>
+            </button>
+            <h2>Introducción a la Web</h2>
+            <p>Descubre cómo funciona la World Wide Web</p>
+        </div>
+
+        <!-- Camino 1: conecta Introducción a la Web con HTML -->
+        <div class="path path-right" id="path-web-1"></div>
+
+        <!-- Lección 2: Estructura con HTML -->
+        <div class="lesson right locked" id="lesson-webHtml">
+            <button class="lesson-button" onclick="openLesson('webHtml')" aria-label="Estructura con HTML">
+                <span class="node-icon">🧱</span>
+            </button>
+            <h2>Estructura con HTML</h2>
+            <p>Aprende a estructurar páginas web con etiquetas</p>
+        </div>
+
+        <!-- Camino 2: conecta HTML con CSS -->
+        <div class="path path-left" id="path-web-2"></div>
+
+        <!-- Lección 3: Estilo con CSS -->
+        <div class="lesson left locked" id="lesson-webCss">
+            <button class="lesson-button" onclick="openLesson('webCss')" aria-label="Estilo con CSS">
+                <span class="node-icon">🎨</span>
+            </button>
+            <h2>Estilo con CSS</h2>
+            <p>Aprende a dar diseño y estilo a tus páginas</p>
+        </div>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>

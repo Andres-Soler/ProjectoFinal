@@ -695,6 +695,68 @@ body > h1 {
     cursor: not-allowed;
 }
 
+/* =========================================================
+   FEEDBACK MESSAGE FOR QUESTIONS
+   ========================================================= */
+
+.question-feedback {
+    display: none;
+    width: 90%;
+    max-width: 500px;
+    margin: 14px auto 0;
+    padding: 12px 16px;
+    box-sizing: border-box;
+
+    background: #ff5c5c18;
+    border: 2px solid var(--coral);
+    border-radius: var(--radius-md);
+    box-shadow: 3px 3px 0 var(--ink);
+
+    animation: feedbackPop 0.25s ease-out;
+}
+
+.feedback-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.feedback-icon {
+    font-size: 18px;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+
+.feedback-text {
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.check-button.check-button-error {
+    background: var(--coral);
+    color: #ffffff;
+    box-shadow: 3px 3px 0 var(--ink);
+    border-color: var(--ink);
+}
+
+.check-button.check-button-error:hover {
+    background: #e04b4b;
+}
+
+@keyframes feedbackPop {
+    0% {
+        opacity: 0;
+        transform: translateY(-4px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 /* =========================================================
    INFORMATION ACTIVITIES
@@ -1249,6 +1311,10 @@ body > h1 {
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
+.course-info span#soon {
+    background: #fee2e2;
+    color: #dc2626;
+}
 
 
 /* Bottom navigation styles are now handled by the unified navbar component */
@@ -1353,4 +1419,54 @@ body > h1 {
 
     font-size: 14px;
     font-weight: 700;
+}
+/* Subtle vertical heart animation */
+#life-1,
+#life-2,
+#life-3 {
+    animation: heartFloat 0.5s ease-in-out infinite;
+}
+
+/* Slightly offset each heart so they don't move together */
+#life-2 {
+    animation-delay: 0.3s;
+}
+
+#life-3 {
+    animation-delay: 0.1s;
+}
+
+@keyframes heartFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+/* Red flash when losing a life */
+#life-1.damage-flash,
+#life-2.damage-flash,
+#life-3.damage-flash {
+    animation:
+        heartDamageFlash 0.65s ease-out,
+        heartFloat 1.8s ease-in-out infinite;
+}
+
+@keyframes heartDamageFlash {
+    0% {
+        filter: brightness(1);
+    }
+
+    20% {
+        filter: brightness(0) saturate(100%)
+                invert(20%) sepia(100%)
+                saturate(6000%) hue-rotate(350deg)
+                brightness(1.5);
+    }
+
+    100% {
+        filter: brightness(1);
+    }
 }
